@@ -77,7 +77,12 @@ class DockerHelperTests(unittest.TestCase):
         self.assertIn('ports:\n      - "8169:8069"', compose_text)
         self.assertIn('command: ["postgres", "-p", "5432"]', compose_text)
         self.assertIn("pg_isready -U odoo -p 5432", compose_text)
-        self.assertIn("addons_path = /odoo/src/addons,/odoo/external-src/sale", cfg_text)
+        self.assertIn(
+            "addons_path =\n"
+            "    /odoo/src/addons,\n"
+            "    /odoo/external-src/sale",
+            cfg_text,
+        )
 
     @patch("odoo_test_tools.docker.run")
     def test_run_odoo_builds_expected_compose_command(self, run):

@@ -120,7 +120,8 @@ ODOO_CFG_TEMPLATE = textwrap.dedent(
     db_port = {pg_container_port}
     db_user = odoo
     db_password = odoo
-    addons_path = {addons_path}
+    addons_path =
+        {addons_path}
     """
 ).lstrip()
 
@@ -188,7 +189,7 @@ def generate_odoo_cfg(
     """Write the ``odoo.cfg`` used by ``pytest-odoo`` inside the container."""
     path.write_text(
         ODOO_CFG_TEMPLATE.format(
-            addons_path=addons_path,
+            addons_path=",\n    ".join(addons_path.split(",")),
             pg_container_port=pg_container_port,
         ),
         encoding="utf-8",

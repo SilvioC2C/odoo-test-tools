@@ -95,7 +95,7 @@ def run() -> int:
         except (OSError, KeyError, configparser.Error) as exc:
             return die(f"Cannot read project Odoo configuration at '{work_dir / 'odoo.cfg'}': {exc}")
         if addons_path:
-            allowed_paths = set(addons_path.split(","))
+            allowed_paths = set(map(str.strip, addons_path.split(",")))
             community_mount = str(odoo_src_container_path)
             enterprise_mount = str(odoo_ent_container_path)
             mounts = {
