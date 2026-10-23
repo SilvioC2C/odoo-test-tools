@@ -85,7 +85,7 @@ def action_init(
     work_dir.mkdir(parents=True, exist_ok=True)
     mounts = collect_repos(
         root, work_dir, args.version,
-        include_enterprise=not args.no_enterprise,
+        exclude_enterprise=args.no_enterprise,
         exclude_addons_paths=args.exclude_addons_paths or [],
         restrict_addons_paths=args.restrict_addons_paths or [],
     )

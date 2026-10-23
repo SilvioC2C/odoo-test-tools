@@ -84,7 +84,7 @@ def run() -> int:
     elif args.action == "test":
         if not modules:
             return die(f"--addons is required for 'test'.")
-        mounts = collect_repos(root, work_dir, args.version, include_enterprise=True)
+        mounts = collect_repos(root, work_dir, args.version, exclude_enterprise=False)
         config = configparser.ConfigParser()
         try:
             with (work_dir / "odoo.cfg").open(encoding="utf-8") as cfg_file:

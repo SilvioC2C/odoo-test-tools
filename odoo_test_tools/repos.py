@@ -13,7 +13,7 @@ def collect_repos(
     work_dir: Path,
     version: str,
     *,
-    include_enterprise: bool,
+    exclude_enterprise: bool,
     exclude_addons_paths: list[Path] | None = None,
     restrict_addons_paths: list[Path] | None = None,
 ) -> dict[str, Path]:
@@ -55,7 +55,7 @@ def collect_repos(
         if org == "odoo" and repo == "odoo":
             container = str(odoo_src_container_path)
         elif org == "odoo" and repo == "enterprise":
-            if not include_enterprise:
+            if exclude_enterprise:
                 console.print(f"  [yellow]↷ skipping odoo/enterprise/{version} (--no-enterprise)[/yellow]")
                 continue
             container = str(odoo_ent_container_path)
